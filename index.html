@@ -41,55 +41,58 @@
 <body class="min-h-screen flex flex-col antialiased bg-slate-50 text-slate-800 selection:bg-indigo-500 selection:text-white pb-8">
 
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-xs">
+        <div class="max-w-md mx-auto px-4 py-2.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-lg shadow-md shrink-0">
                     <i class="fa-solid fa-calendar-check"></i>
                 </div>
-                <div>
-                    <h1 class="font-extrabold text-sm text-slate-900 tracking-tight leading-none">근무보고 캘린더</h1>
-                    <p class="text-[10px] text-slate-400 font-medium mt-0.5">간편 시간 작성 · 자동 계산 · 보고서 생성</p>
+                <div class="space-y-0.5">
+                    <!-- 헤더 타이틀을 고정 텍스트로 변경 -->
+                    <h1 class="font-black text-sm text-slate-900 tracking-tight" id="headerDateTitle">근무보고 캘린더</h1>
+                    <p class="text-[10px] font-medium text-slate-400 leading-tight">간편 시간 작성 · 자동 계산 · 보고서 생성</p>
                 </div>
             </div>
 
-            <button id="todayBtn" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs font-semibold rounded-xl transition flex items-center gap-1.5 border border-slate-200/60">
-                <i class="fa-solid fa-rotate-left text-[10px]"></i>
-                <span>오늘</span>
+            <button id="todayBtn" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs font-bold rounded-lg transition flex items-center gap-1.5">
+                <i class="fa-solid fa-rotate-left text-[10px]"></i> 오늘
             </button>
         </div>
 
         <!-- Sticky Navigation Segmented Bar -->
-        <div class="bg-white/90 border-t border-slate-100 px-3.5 py-2">
-            <div class="max-w-md mx-auto grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold text-center">
-                <button id="navTabCalendar" onclick="scrollToSection('section-calendar')" class="py-1.5 rounded-lg bg-indigo-600 text-white shadow-2xs transition">캘린더</button>
-                <button id="navTabEditor" onclick="scrollToSection('section-editor')" class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">시간 작성</button>
-                <button id="navTabReport" onclick="scrollToSection('section-report')" class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">보고서</button>
+        <div class="bg-white/90 border-t border-slate-100 px-3.5 py-1.5">
+            <div class="max-w-md mx-auto grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-lg text-xs font-bold text-center">
+                <button id="navTabCalendar" onclick="scrollToSection('section-calendar')" class="py-1.5 rounded-md bg-indigo-600 text-white shadow-2xs transition flex items-center justify-center gap-1">
+                    <i class="fa-regular fa-calendar"></i> 캘린더
+                </button>
+                <button id="navTabEditor" onclick="scrollToSection('section-editor')" class="py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1">
+                    <i class="fa-regular fa-clock"></i> 시간 작성
+                </button>
+                <button id="navTabReport" onclick="scrollToSection('section-report')" class="py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1">
+                    <i class="fa-regular fa-paper-plane"></i> 보고서
+                </button>
             </div>
         </div>
     </header>
 
     <main class="max-w-md mx-auto px-3.5 py-3.5 flex-grow w-full space-y-3.5">
         
-        <!-- SECTION 1: Calendar Card -->
-        <section id="section-calendar" class="scroll-mt-28 bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs space-y-3">
-            <!-- Calendar Controls Header (Unified Header Style) -->
-            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-calendar-days text-indigo-600"></i>
-                    월간 캘린더
-                </span>
+        <!-- Removed App Title Card -->
 
+        <section id="section-calendar" class="scroll-mt-28 bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs space-y-3">
+            <!-- Calendar Controls Header -->
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
                 <button id="monthDisplayBtn" onclick="openMonthPickerModal()" 
-                    class="font-bold text-slate-800 text-xs hover:text-indigo-600 bg-slate-50 hover:bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200/80 transition flex items-center gap-1.5 group">
+                    class="font-black text-slate-900 text-sm hover:text-indigo-600 transition flex items-center gap-1">
+                    <i class="fa-solid fa-calendar-days text-indigo-500 text-xs mr-0.5"></i>
                     <span id="monthDisplayLabel">2026년 7월</span>
-                    <i class="fa-solid fa-chevron-down text-[10px] text-indigo-500 group-hover:text-indigo-700 transition"></i>
+                    <span class="text-xs text-slate-400">▾</span>
                 </button>
 
-                <div class="flex items-center gap-0.5">
-                    <button onclick="navigateMonth(-1)" class="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition">
+                <div class="flex items-center gap-1">
+                    <button onclick="navigateMonth(-1)" aria-label="이전달" class="w-7 h-7 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition font-bold">
                         <i class="fa-solid fa-chevron-left text-xs"></i>
                     </button>
-                    <button onclick="navigateMonth(1)" class="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition">
+                    <button onclick="navigateMonth(1)" aria-label="다음달" class="w-7 h-7 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition font-bold">
                         <i class="fa-solid fa-chevron-right text-xs"></i>
                     </button>
                 </div>
@@ -112,106 +115,73 @@
             </div>
         </section>
 
-        <!-- SECTION 2: Weekly Overtime Stats Card (Unified Header Style) -->
-        <section class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs space-y-3">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chart-line text-indigo-600"></i>
-                    주간 초과근무
-                </span>
-                <span id="weekRangeLabel" class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-100/80 font-mono tracking-tight">
-                    7/19(일) ~ 7/25(토)
-                </span>
-            </div>
-
-            <div class="grid grid-cols-3 gap-2 text-center">
-                <div class="bg-slate-50/90 p-2 rounded-xl border border-slate-100">
-                    <span class="block text-[10px] text-slate-400 font-semibold mb-0.5">전주 이월</span>
-                    <span id="prevWeekCarryoverText" class="text-xs font-bold text-indigo-900 font-mono">0시간</span>
-                </div>
-                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-2xs">
-                    <span class="block text-[10px] text-indigo-100 font-semibold mb-0.5">이번 주 누적</span>
-                    <span id="currentWeekTotalText" class="text-xs font-bold font-mono">0시간</span>
-                </div>
-                <div class="bg-slate-50/90 p-2 rounded-xl border border-slate-100">
-                    <span class="block text-[10px] text-slate-400 font-semibold mb-0.5">다음 주 이월</span>
-                    <span id="nextWeekCarryoverText" class="text-xs font-bold text-indigo-900 font-mono">0시간</span>
-                </div>
-            </div>
-
-            <!-- Progress Bar -->
-            <div class="pt-0.5">
-                <div class="flex justify-between items-center text-[10px] text-slate-400 font-medium mb-1">
-                    <span>52시간 기준</span>
-                    <span id="weekProgressPercentText" class="font-mono text-indigo-600 font-bold">0%</span>
-                </div>
-                <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div id="weekProgressBar" class="h-full bg-indigo-600 rounded-full transition-all duration-300 w-0"></div>
-                </div>
-            </div>
-        <!-- SECTION 3: Daily Work Log Editor (Unified Header Style) -->
         <section id="section-editor" class="scroll-mt-28 bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs space-y-3.5">
             
-            <!-- Header & Selected Date Title -->
-            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <!-- Header & Selected Date Title (Enlarged & Highlighted) -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                        <i class="fa-solid fa-calendar-day text-indigo-600"></i>
-                        상세 작성
-                    </span>
-                    <span id="selectedDateTitle" class="px-2 py-0.5 bg-indigo-50 text-indigo-700 text-[11px] font-bold rounded-md border border-indigo-100/80 font-mono">7월 23일 목요일</span>
+                    <div id="selectedDateIndicator" class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></div>
+                    <span id="selectedDateTitle" class="text-base sm:text-lg font-black text-slate-900 tracking-tight"></span>
                 </div>
 
-                <button id="clearDayBtn" class="px-2 py-1 text-slate-400 hover:text-rose-600 text-[11px] font-semibold rounded-lg hover:bg-rose-50 transition flex items-center gap-1">
-                    <i class="fa-regular fa-trash-can"></i>
-                    <span>초기화</span>
-                </button>
+                <div class="flex items-center gap-1.5">
+                    <button id="verseToggleBtn" onclick="toggleVerseMode()" class="px-2.5 py-1 text-xs font-bold rounded-xl transition border bg-slate-100 text-slate-600 border-slate-200 hover:bg-rose-50 hover:text-rose-600 flex items-center gap-1">
+                        <i class="fa-solid fa-bolt text-[10px]"></i> 벌스
+                    </button>
+                    <button id="clearDayBtn" class="px-2 py-1 text-slate-400 hover:text-rose-600 text-xs font-semibold rounded-xl hover:bg-rose-50 transition flex items-center gap-1">
+                        <i class="fa-regular fa-trash-can text-[11px]"></i> 초기화
+                    </button>
+                </div>
+            </div>
+
+            <!-- Verse Banner Indicator -->
+            <div id="verseNoticeBanner" class="hidden bg-rose-50 border border-rose-200 rounded-xl p-2.5 text-xs text-rose-700 flex items-center justify-between font-medium">
+                <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                    <span><strong>벌스:</strong> 새벽 근로 포함 시 AM 9:30부터 기본 근무 계산</span>
+                </div>
             </div>
 
             <div class="space-y-3">
                 <!-- 1. Daily Schedule Note -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1.5">
-                        <i class="fa-solid fa-pen-to-square text-indigo-600"></i>
-                        당일 일정
+                    <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                        <i class="fa-regular fa-pen-to-square text-indigo-500"></i> 당일 일정
                     </label>
                     <input type="text" id="summaryNoteInput" 
-                        placeholder="예: 정원-샵근무 후 휴식 후 샵근무 후 주연 팬미팅 출장" 
-                        class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition placeholder:text-slate-300">
+                        placeholder="예: 정원-박진영댄서 출장 후 유노윤호 출장 연결" 
+                        class="w-full text-xs font-medium px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition placeholder:text-slate-300 [&:not(:placeholder-shown)]:bg-indigo-50/50 [&:not(:placeholder-shown)]:border-indigo-100 [&:not(:placeholder-shown)]:text-indigo-950">
                 </div>
 
-                <!-- 2. Overtime Input Box (Clean Header Icon Added, Inside Clock Removed) -->
+                <!-- 2. Daily Overtime Input Box (With Clock Icon Button) -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1.5">
-                        <i class="fa-solid fa-clock text-indigo-600"></i>
-                        초과근무 (+시간)
+                    <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                        <i class="fa-regular fa-clock text-indigo-500"></i> 당일 초과근무 (+시간)
                     </label>
-                    <div onclick="openExtraTimePickerModal()" 
-                        class="flex items-center justify-between bg-slate-50 border border-slate-200 hover:border-indigo-400 active:bg-slate-100 rounded-xl py-2.5 px-3.5 cursor-pointer transition shadow-2xs group">
-                        <div class="flex items-center w-full">
-                            <input type="text" id="extraTimeInput" readonly
-                                placeholder="시간 선택 " 
-                                class="text-xs font-bold text-indigo-700 bg-transparent border-none focus:outline-none w-full cursor-pointer pointer-events-none placeholder:text-slate-400 placeholder:font-normal">
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-indigo-600 transition shrink-0 ml-1"></i>
+                    <div class="relative flex items-center">
+                        <input type="text" id="extraTimeInput" 
+                            placeholder="예: 2시간 30분 또는 2시간" 
+                            class="w-full text-xs font-medium px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition placeholder:text-slate-300 pr-10 [&:not(:placeholder-shown)]:bg-indigo-50/80 [&:not(:placeholder-shown)]:border-indigo-200/80 [&:not(:placeholder-shown)]:text-indigo-950">
+                        <button type="button" onclick="openExtraTimePickerModal()" title="시간 선택" class="absolute right-1.5 p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 active:bg-indigo-100 rounded-lg transition flex items-center justify-center">
+                            <i class="fa-regular fa-clock text-sm"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Quick Preset Chips Bar -->
             <div class="pt-1">
-                <span class="block text-xs font-bold text-slate-700 mb-2 flex items-center gap-1.5">
-                    <i class="fa-solid fa-list-check text-indigo-600"></i>
-                    시간 항목 추가
+                <span class="block text-xs font-bold text-slate-700 mb-2 flex items-center gap-1">
+                    <i class="fa-solid fa-plus-circle text-indigo-500"></i> 시간 항목 추가
                 </span>
                 <div class="flex flex-wrap gap-1.5 text-xs font-medium">
-                    <button onclick="addPresetEvent('출근시간', 'AM12:00')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium">+ 출근</button>
-                    <button onclick="addPresetEvent('휴식시간', 'AM12:00-PM12:00')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium">+ 휴식</button>
-                    <button onclick="addPresetEvent('재출근시간', 'AM12:00')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium">+ 재출근</button>
-                    <button onclick="addPresetEvent('출발시간', 'AM12:00')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium">+ 출발</button>
-                    <button onclick="addPresetEvent('종료시간', 'AM12:00')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium">+ 종료</button>
-                    <button onclick="addPresetEvent('복귀시간', 'AM12:00')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium">+ 복귀</button>
-                    <button onclick="addCustomEvent()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs rounded-xl transition font-bold shadow-2xs">+ 직접입력</button>
+                    <button onclick="addPresetEvent('출근시간', 'AM12:00')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium flex items-center gap-1">출근</button>
+                    <button onclick="addPresetEvent('휴식시간', 'AM12:00-PM12:00')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium flex items-center gap-1">휴식</button>
+                    <button onclick="addPresetEvent('재출근시간', 'AM12:00')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium flex items-center gap-1">재출근</button>
+                    <button onclick="addPresetEvent('출발시간', 'AM12:00')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium flex items-center gap-1">출발</button>
+                    <button onclick="addPresetEvent('종료시간', 'AM12:00')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium flex items-center gap-1">종료</button>
+                    <button onclick="addPresetEvent('복귀시간', 'AM12:00')" class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 text-xs rounded-xl transition font-medium flex items-center gap-1">복귀</button>
+                    <button onclick="addCustomEvent()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs rounded-xl transition font-bold shadow-2xs flex items-center gap-1"><i class="fa-solid fa-plus text-[10px]"></i> 직접입력</button>
                 </div>
             </div>
 
@@ -221,16 +191,13 @@
             </div>
         </section>
 
-        <!-- SECTION 4: Dark Navy Formatted Text Box (Matching Kakao Export Style) -->
         <section id="section-report" class="scroll-mt-28 bg-slate-900 text-slate-100 rounded-2xl p-4 shadow-md space-y-3">
             <div class="flex items-center justify-between pb-2 border-b border-slate-800">
                 <span class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-                    <i class="fa-regular fa-file-lines text-indigo-400"></i>
-                    근무보고 Text (카톡 전송용)
+                    <i class="fa-regular fa-paper-plane text-indigo-400"></i> 근무보고
                 </span>
-                <button id="copyReportBtn" onclick="copyFormattedReport()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-2xs">
-                    <i class="fa-regular fa-copy"></i>
-                    <span>복사하기</span>
+                <button id="copyReportBtn" onclick="copyFormattedReport()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs font-bold rounded-xl transition shadow-2xs flex items-center gap-1">
+                    <i class="fa-regular fa-copy text-[11px]"></i> 복사하기
                 </button>
             </div>
 
@@ -242,7 +209,6 @@
 
     <!-- Toast Notification Overlay -->
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-2xl flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-200 z-50 pointer-events-none border border-slate-700 text-xs font-medium">
-        <i class="fa-solid fa-check text-indigo-400"></i>
         <span id="toastMessage">클립보드에 복사되었습니다!</span>
     </div>
 
@@ -251,7 +217,7 @@
         <div class="bg-white rounded-2xl p-4 max-w-xs w-full shadow-xl border border-slate-100 space-y-3 animate-in fade-in duration-150">
             
             <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                <h3 class="font-bold text-slate-800 text-xs">시간 설정</h3>
+                <h3 class="font-bold text-slate-800 text-xs flex items-center gap-1"><i class="fa-regular fa-clock text-indigo-600"></i> 시간 설정</h3>
                 <span id="tpLivePreview" class="text-xs font-mono font-bold text-indigo-600">AM12:00</span>
             </div>
 
@@ -296,7 +262,7 @@
         </div>
     </div>
 
-    <!-- Custom Extra Time Picker Modal (Unified Indigo Styling) -->
+    <!-- Custom Extra Time Picker Modal -->
     <div id="extraTimePickerModal" onclick="if(event.target === this) closeExtraTimePickerModal()" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-4 max-w-xs w-full shadow-xl border border-slate-100 space-y-3.5">
             <div class="flex items-center justify-between border-b border-slate-100 pb-2">
@@ -437,23 +403,58 @@
             let hours = 0;
             let mins = 0;
 
-            let hMatch = str.match(/(\d+)\s*시간/);
-            if (hMatch) hours = parseInt(hMatch[1], 10);
+            let hMatch = str.match(/(\d+(?:\.\d+)?)\s*시간/);
+            if (hMatch) {
+                let val = parseFloat(hMatch[1]);
+                hours = Math.floor(val);
+                mins += Math.round((val - hours) * 60);
+            }
 
             let mMatch = str.match(/(\d+)\s*분/);
-            if (mMatch) mins = parseInt(mMatch[1], 10);
+            if (mMatch) mins += parseInt(mMatch[1], 10);
 
             if (!hMatch && !mMatch) {
-                let parts = str.split(':');
-                if (parts.length === 2) {
-                    let h = parseInt(parts[0], 10);
-                    let m = parseInt(parts[1], 10);
-                    if (!isNaN(h)) hours = h;
-                    if (!isNaN(m)) mins = m;
+                let num = parseFloat(str);
+                if (!isNaN(num)) {
+                    hours = Math.floor(num);
+                    mins += Math.round((num - hours) * 60);
+                } else {
+                    let parts = str.split(':');
+                    if (parts.length === 2) {
+                        let h = parseInt(parts[0], 10);
+                        let m = parseInt(parts[1], 10);
+                        if (!isNaN(h)) hours = h;
+                        if (!isNaN(m)) mins = m;
+                    }
                 }
             }
 
             return hours * 60 + mins;
+        }
+
+        // 메모 텍스트에서 순수 내용만 추출하는 헬퍼 함수
+        function cleanDetailText(str) {
+            if (!str) return '';
+            let cleaned = str.trim();
+            cleaned = cleaned.replace(/^\(/, '').replace(/\)\*?$/, '').replace(/\*$/, '').trim();
+            return cleaned;
+        }
+
+        // 새벽 근로 (AM 09:30 이전) 및 벌스 적용 여부 확인
+        function isDawnVerseEvent(timeStr, isVerse) {
+            if (!isVerse || !timeStr) return false;
+            const parts = timeStr.split(/[-~]/);
+            const parsedMin = parseTimeToMinutes(parts[0]);
+            // AM 09:30 이전 (570분 미만)
+            return parsedMin !== null && parsedMin < (9 * 60 + 30);
+        }
+
+        // 메모 서식 자동 생성: (메모내용) 또는 새벽벌스 시 (메모내용)*
+        function formatDetailText(rawDetail, timeStr, isVerse) {
+            const clean = cleanDetailText(rawDetail);
+            if (!clean) return '';
+            const isDawn = isDawnVerseEvent(timeStr, isVerse);
+            return `(${clean})${isDawn ? '*' : ''}`;
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -466,6 +467,7 @@
         function saveData() {
             localStorage.setItem("workReportCalendarData_v4", JSON.stringify(workData));
             updateFormattedOutput();
+            renderCalendar();
         }
 
         function navigateMonth(delta) {
@@ -535,6 +537,90 @@
             }
         }
 
+        function selectDate(dateKey) {
+            selectedDateKey = dateKey;
+            isUserEditingOutput = false;
+            renderCalendar();
+            loadDateData(selectedDateKey);
+        }
+
+        function getWeeklyStats(dateKey) {
+            const d = new Date(dateKey + 'T00:00:00');
+            if (isNaN(d.getTime())) {
+                return {
+                    weekRangeLabel: '',
+                    prevWeekCarryoverMins: 0,
+                    currentWeekTotalMins: 0,
+                    nextWeekCarryoverMins: 0
+                };
+            }
+
+            const sun = new Date(d);
+            sun.setDate(d.getDate() - d.getDay());
+            const sat = new Date(sun);
+            sat.setDate(sun.getDate() + 6);
+
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            const formatShort = (dt) => `${dt.getMonth() + 1}/${dt.getDate()}(${days[dt.getDay()]})`;
+            const weekRangeLabel = `${formatShort(sun)} ~ ${formatShort(sat)}`;
+
+            // Calculate previous week carryover
+            const prevSun = new Date(sun);
+            prevSun.setDate(sun.getDate() - 7);
+            let prevWeekExtraMins = 0;
+            for (let i = 0; i < 7; i++) {
+                const dayDate = new Date(prevSun);
+                dayDate.setDate(prevSun.getDate() + i);
+                const k = `${dayDate.getFullYear()}-${String(dayDate.getMonth() + 1).padStart(2, '0')}-${String(dayDate.getDate()).padStart(2, '0')}`;
+                prevWeekExtraMins += getDailyExtraMinutes(k);
+            }
+            const prevWeekCarryoverMins = Math.max(0, prevWeekExtraMins - 720);
+
+            // Calculate current week total overtime
+            let currentWeekExtraMins = 0;
+            for (let i = 0; i < 7; i++) {
+                const dayDate = new Date(sun);
+                dayDate.setDate(sun.getDate() + i);
+                const k = `${dayDate.getFullYear()}-${String(dayDate.getMonth() + 1).padStart(2, '0')}-${String(dayDate.getDate()).padStart(2, '0')}`;
+                currentWeekExtraMins += getDailyExtraMinutes(k);
+            }
+
+            const currentWeekTotalMins = currentWeekExtraMins + prevWeekCarryoverMins;
+            const nextWeekCarryoverMins = Math.max(0, currentWeekTotalMins - 720);
+
+            return {
+                weekRangeLabel,
+                prevWeekCarryoverMins,
+                currentWeekTotalMins,
+                nextWeekCarryoverMins
+            };
+        }
+
+        function updateWeeklyDashboard(dateKey) {
+            const stats = getWeeklyStats(dateKey);
+
+            const rangeLabel = document.getElementById('weekRangeLabel');
+            if (rangeLabel) rangeLabel.textContent = stats.weekRangeLabel;
+
+            const formatMinsToText = (mins) => {
+                const h = Math.floor(mins / 60);
+                const m = mins % 60;
+                if (h === 0 && m === 0) return "0시간";
+                if (m === 0) return `${h}시간`;
+                if (h === 0) return `${m}분`;
+                return `${h}시간 ${m}분`;
+            };
+
+            const prevEl = document.getElementById('prevWeekCarryoverText');
+            if (prevEl) prevEl.textContent = formatMinsToText(stats.prevWeekCarryoverMins);
+
+            const currEl = document.getElementById('currentWeekTotalText');
+            if (currEl) currEl.textContent = formatMinsToText(stats.currentWeekTotalMins);
+
+            const nextEl = document.getElementById('nextWeekCarryoverText');
+            if (nextEl) nextEl.textContent = formatMinsToText(stats.nextWeekCarryoverMins);
+        }
+
         function renderCalendar() {
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
@@ -564,9 +650,14 @@
                 const dayOfWeek = new Date(year, month, d).getDay();
                 const isToday = (year === todayY && month === todayM && d === todayD);
                 const isSelected = (dateKey === selectedDateKey);
-                const hasData = workData[dateKey] && (
-                    (workData[dateKey].summary && workData[dateKey].summary.trim() !== '') ||
-                    (workData[dateKey].events && workData[dateKey].events.length > 0)
+                const dayData = workData[dateKey] || {};
+                const isVerse = !!dayData.isVerse;
+
+                const hasData = (
+                    (dayData.summary && dayData.summary.trim() !== '') ||
+                    (dayData.extraTime && dayData.extraTime.trim() !== '') ||
+                    (dayData.events && dayData.events.length > 0) ||
+                    isVerse
                 );
 
                 const cell = document.createElement('button');
@@ -577,24 +668,37 @@
                 if (dayOfWeek === 6) textColor = 'text-indigo-600';
 
                 let bgStyle = 'hover:bg-slate-100 bg-slate-50/50 border border-slate-100';
+
+                // 벌스 적용 여부에 따른 캘린더 셀 색상 설정
                 if (isSelected) {
-                    bgStyle = 'bg-indigo-600 text-white font-bold shadow-2xs';
-                    textColor = 'text-white';
+                    if (isVerse) {
+                        bgStyle = 'bg-rose-600 text-white font-bold shadow-2xs';
+                        textColor = 'text-white';
+                    } else {
+                        bgStyle = 'bg-indigo-600 text-white font-bold shadow-2xs';
+                        textColor = 'text-white';
+                    }
+                } else if (isVerse) {
+                    bgStyle = 'bg-rose-50/90 border border-rose-200 text-rose-600 font-bold hover:bg-rose-100';
+                    if (dayOfWeek !== 0 && dayOfWeek !== 6) textColor = 'text-rose-600';
                 } else if (isToday) {
                     bgStyle = 'bg-indigo-50/80 border border-indigo-200 font-bold';
                 }
 
-                cell.className = `p-1.5 rounded-2xl flex flex-col items-center justify-between min-h-[42px] transition relative ${bgStyle} ${textColor}`;
+                cell.className = `p-1 rounded-2xl flex flex-col items-center justify-between min-h-[44px] transition relative ${bgStyle} ${textColor}`;
 
-                let dotHtml = '';
-                if (hasData) {
+                let badgeHtml = '';
+                if (isVerse) {
+                    const dotColor = isSelected ? 'bg-white' : 'bg-rose-500';
+                    badgeHtml = `<span class="w-1.5 h-1.5 ${dotColor} rounded-full mt-0.5 shadow-2xs" title="벌스 적용일"></span>`;
+                } else if (hasData) {
                     const dotColor = isSelected ? 'bg-white' : 'bg-indigo-600';
-                    dotHtml = `<span class="w-1.5 h-1.5 ${dotColor} rounded-full mt-0.5"></span>`;
+                    badgeHtml = `<span class="w-1.5 h-1.5 ${dotColor} rounded-full mt-0.5"></span>`;
                 }
 
                 cell.innerHTML = `
                     <span class="text-xs font-semibold">${d}</span>
-                    ${dotHtml}
+                    ${badgeHtml}
                 `;
 
                 cell.onclick = () => selectDate(dateKey);
@@ -602,24 +706,27 @@
             }
         }
 
-        function selectDate(dateKey) {
-            selectedDateKey = dateKey;
-            isUserEditingOutput = false;
-            renderCalendar();
-            loadDateData(dateKey);
-        }
-
         function loadDateData(dateKey) {
-            const data = workData[dateKey] || { summary: "", extraTime: "", events: [] };
+            const data = workData[dateKey] || { summary: "", extraTime: "", events: [], isVerse: false };
 
             const dateObj = new Date(dateKey + 'T00:00:00');
             const daysOfWeek = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-            const formattedTitle = `${dateObj.getMonth() + 1}월 ${dateObj.getDate()}일 ${daysOfWeek[dateObj.getDay()]}`;
-
+            const formattedDate = `${dateObj.getMonth() + 1}월 ${dateObj.getDate()}일 ${daysOfWeek[dateObj.getDay()]}`;
+            
+            // "근무보고 캘린더" 대신 선택한 날짜 표시 (아래쪽 영역만)
             const titleEl = document.getElementById('selectedDateTitle');
             if (titleEl) {
-                titleEl.textContent = formattedTitle;
+                titleEl.textContent = formattedDate;
             }
+
+            // 헤더 날짜 업데이트 로직 삭제 (이 부분 삭제 또는 주석 처리됨)
+            // const headerTitleEl = document.getElementById('headerDateTitle');
+            // if (headerTitleEl) {
+            //     headerTitleEl.textContent = formattedDate;
+            // }
+
+            // Update Verse Toggle UI
+            updateVerseToggleUI(!!data.isVerse);
 
             const summaryInput = document.getElementById('summaryNoteInput');
             if (summaryInput) summaryInput.value = data.summary || '';
@@ -632,9 +739,38 @@
             updateFormattedOutput();
         }
 
+        function toggleVerseMode() {
+            if (!workData[selectedDateKey]) workData[selectedDateKey] = { summary: "", extraTime: "", events: [] };
+            workData[selectedDateKey].isVerse = !workData[selectedDateKey].isVerse;
+            
+            updateVerseToggleUI(workData[selectedDateKey].isVerse);
+            isUserEditingOutput = false;
+            saveData();
+            renderCalendar();
+            renderEventsList();
+            showToast(workData[selectedDateKey].isVerse ? "벌스 모드가 적용되었습니다 (AM 09:30 기준)" : "벌스 모드가 해제되었습니다.");
+        }
+
+        function updateVerseToggleUI(isVerse) {
+            const btn = document.getElementById('verseToggleBtn');
+            const banner = document.getElementById('verseNoticeBanner');
+            const indicator = document.getElementById('selectedDateIndicator');
+
+            if (isVerse) {
+                if (btn) btn.className = "px-2.5 py-1 text-xs font-bold rounded-xl transition flex items-center gap-1 border bg-rose-600 text-white border-rose-600 shadow-2xs";
+                if (banner) banner.classList.remove('hidden');
+                if (indicator) indicator.className = "w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse";
+            } else {
+                if (btn) btn.className = "px-2.5 py-1 text-xs font-bold rounded-xl transition flex items-center gap-1 border bg-slate-100 text-slate-600 border-slate-200 hover:bg-rose-50 hover:text-rose-600";
+                if (banner) banner.classList.add('hidden');
+                if (indicator) indicator.className = "w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse";
+            }
+        }
+
         function getDailyNetWorkMinutes(dateKey) {
             const current = workData[dateKey] || {};
             const events = current.events || [];
+            const isVerse = !!current.isVerse;
 
             let startMin = null;
             let endMin = null;
@@ -668,105 +804,56 @@
             });
 
             if (startMin !== null && endMin !== null) {
-                let grossMinutes = endMin - startMin;
+                let actualStart = startMin;
+                // If Verse mode is ON, standard work calculation starts from AM 9:30 (570 mins)
+                if (isVerse) {
+                    const verseStartMin = 9 * 60 + 30; // 570 mins (09:30 AM)
+                    if (actualStart < verseStartMin) {
+                        actualStart = verseStartMin;
+                    }
+                }
+
+                let grossMinutes = endMin - actualStart;
                 if (grossMinutes < 0) grossMinutes += 24 * 60;
                 return Math.max(0, grossMinutes - totalRestMinutes);
             }
             return 0;
         }
 
-        function getWeekDateKeys(dateKey) {
-            const d = new Date(dateKey + 'T00:00:00');
-            const dayOfWeek = d.getDay();
-            const sunDate = new Date(d);
-            sunDate.setDate(d.getDate() - dayOfWeek);
+        // Returns extra minutes generated before AM 9:30 in Verse mode
+        function getVerseBefore930Minutes(dateKey) {
+            const current = workData[dateKey] || {};
+            if (!current.isVerse) return 0;
 
-            const keys = [];
-            for (let i = 0; i < 7; i++) {
-                const curr = new Date(sunDate);
-                curr.setDate(sunDate.getDate() + i);
-                const y = curr.getFullYear();
-                const m = String(curr.getMonth() + 1).padStart(2, '0');
-                const day = String(curr.getDate()).padStart(2, '0');
-                keys.push(`${y}-${m}-${day}`);
-            }
-            return keys;
-        }
+            const events = current.events || [];
+            let startMin = null;
 
-        function getWeeklyStats(dateKey) {
-            const weekKeys = getWeekDateKeys(dateKey);
-            const sunDateKey = weekKeys[0];
+            events.forEach(ev => {
+                const title = (ev.title || "").trim();
+                const timeStr = (ev.time || "").trim();
 
-            const prevSun = new Date(sunDateKey + 'T00:00:00');
-            prevSun.setDate(prevSun.getDate() - 7);
-            const prevSunKey = `${prevSun.getFullYear()}-${String(prevSun.getMonth() + 1).padStart(2, '0')}-${String(prevSun.getDate()).padStart(2, '0')}`;
-            const prevWeekKeys = getWeekDateKeys(prevSunKey);
-
-            let prevWeekSum = 0;
-            prevWeekKeys.forEach(k => {
-                prevWeekSum += getDailyNetWorkMinutes(k);
-            });
-
-            const prevWeekCarryoverMins = Math.max(0, prevWeekSum - 3120);
-
-            let currentWeekDailySum = 0;
-            weekKeys.forEach(k => {
-                currentWeekDailySum += getDailyNetWorkMinutes(k);
-            });
-
-            const totalWeekMins = currentWeekDailySum + prevWeekCarryoverMins;
-            const excessMinsForNextWeek = Math.max(0, totalWeekMins - 3120);
-
-            return {
-                weekKeys,
-                sunDateKey: weekKeys[0],
-                satDateKey: weekKeys[6],
-                currentWeekDailySum,
-                prevWeekCarryoverMins,
-                totalWeekMins,
-                excessMinsForNextWeek
-            };
-        }
-
-        function formatMinutesToHoursStr(totalMins) {
-            const h = Math.floor(totalMins / 60);
-            const m = totalMins % 60;
-            if (h === 0 && m === 0) return "0시간";
-            return `${h}시간${m > 0 ? ' ' + m + '분' : ''}`;
-        }
-
-        function updateWeeklyDashboard(dateKey) {
-            const stats = getWeeklyStats(dateKey);
-
-            const sunObj = new Date(stats.sunDateKey + 'T00:00:00');
-            const satObj = new Date(stats.satDateKey + 'T00:00:00');
-            const rangeLabel = `${sunObj.getMonth() + 1}/${sunObj.getDate()}(일) ~ ${satObj.getMonth() + 1}/${satObj.getDate()}(토)`;
-            
-            const rangeEl = document.getElementById('weekRangeLabel');
-            if (rangeEl) rangeEl.textContent = rangeLabel;
-
-            const prevCarryEl = document.getElementById('prevWeekCarryoverText');
-            if (prevCarryEl) prevCarryEl.textContent = formatMinutesToHoursStr(stats.prevWeekCarryoverMins);
-
-            const currentTotalEl = document.getElementById('currentWeekTotalText');
-            if (currentTotalEl) currentTotalEl.textContent = formatMinutesToHoursStr(stats.totalWeekMins);
-
-            const nextCarryEl = document.getElementById('nextWeekCarryoverText');
-            if (nextCarryEl) nextCarryEl.textContent = formatMinutesToHoursStr(stats.excessMinsForNextWeek);
-
-            const pct = Math.min(100, Math.round((stats.totalWeekMins / 3120) * 100));
-            const pctEl = document.getElementById('weekProgressPercentText');
-            if (pctEl) pctEl.textContent = `${pct}%`;
-
-            const barEl = document.getElementById('weekProgressBar');
-            if (barEl) {
-                barEl.style.width = `${pct}%`;
-                if (stats.totalWeekMins > 3120) {
-                    barEl.className = "h-full bg-indigo-800 rounded-full transition-all duration-300";
-                } else {
-                    barEl.className = "h-full bg-indigo-600 rounded-full transition-all duration-300";
+                if (!title.includes("휴식")) {
+                    const parsed = parseTimeToMinutes(timeStr);
+                    if (parsed !== null) {
+                        if (startMin === null || parsed < startMin) startMin = parsed;
+                    }
                 }
+            });
+
+            const verseStartMin = 9 * 60 + 30; // 09:30 AM
+            if (startMin !== null && startMin < verseStartMin) {
+                return verseStartMin - startMin; // e.g. 5:15 to 9:30 = 255 mins (4h 15m)
             }
+            return 0;
+        }
+
+        function getDailyExtraMinutes(dateKey) {
+            const data = workData[dateKey] || {};
+            let mins = parseDurationToMinutes(data.extraTime || "");
+            if (data.isVerse) {
+                mins += getVerseBefore930Minutes(dateKey);
+            }
+            return mins;
         }
 
         function calculateWorkDurations() {
@@ -782,30 +869,38 @@
                 workStr = "근무시간 0시간이고";
             }
 
+            const dailyExtraMins = getDailyExtraMinutes(selectedDateKey);
             const stats = getWeeklyStats(selectedDateKey);
-            let extraStr = "(+)";
-            let extraMinutes = 0;
-            const manualExtra = (current.extraTime || "").trim();
+            const prevCarryMins = stats.prevWeekCarryoverMins;
 
-            if (manualExtra) {
-                let cleanedExtra = manualExtra.replace(/^[(\+\s)]+/, '').replace(/[)]+$/, '').trim();
-                extraStr = `(+${cleanedExtra})`;
-                extraMinutes = parseDurationToMinutes(cleanedExtra);
-            } else if (stats.prevWeekCarryoverMins > 0) {
-                extraStr = `(+${formatMinutesToHoursStr(stats.prevWeekCarryoverMins)})`;
-                extraMinutes = stats.prevWeekCarryoverMins;
+            const totalReportExtraMins = dailyExtraMins + prevCarryMins;
+
+            let extraStr = "";
+            if (totalReportExtraMins > 0) {
+                const h = Math.floor(totalReportExtraMins / 60);
+                const m = totalReportExtraMins % 60;
+                let str = "";
+                if (h > 0) str += `${h}시간`;
+                if (m > 0) str += `${m > 0 && h > 0 ? ' ' : ''}${m}분`;
+
+                if (prevCarryMins > 0) {
+                    const carryH = Math.floor(prevCarryMins / 60);
+                    const carryM = prevCarryMins % 60;
+                    let carryStr = `${carryH}시간${carryM > 0 ? ' ' + carryM + '분' : ''}`;
+                    extraStr = ` (+${str} [전주 이월 ${carryStr} 포함])`;
+                } else {
+                    extraStr = ` (+${str})`;
+                }
+            } else if (current.extraTime && current.extraTime.trim()) {
+                extraStr = ` (+${current.extraTime.trim()})`;
+            } else {
+                extraStr = " (+0시간)";
             }
 
-            let combinedMinutes = netWorkMinutes + extraMinutes;
+            let combinedMinutes = netWorkMinutes + totalReportExtraMins;
             const grandHours = Math.floor(combinedMinutes / 60);
             const grandMins = combinedMinutes % 60;
             let totalStr = `총 근무시간 ${grandHours}시간 ${grandMins > 0 ? grandMins + '분' : ''} 입니다`;
-
-            // Update Total Hours Input in UI
-            const totalHoursDisplay = document.getElementById('totalHoursDisplayInput');
-            if (totalHoursDisplay) {
-                totalHoursDisplay.value = `${grandHours}시간 ${grandMins > 0 ? grandMins + '분' : ''}`;
-            }
 
             return {
                 workStr: workStr,
@@ -820,6 +915,7 @@
             updateWeeklyDashboard(selectedDateKey);
             const current = workData[selectedDateKey] || {};
             const events = current.events || [];
+            const isVerse = !!current.isVerse;
             let lines = [];
 
             const dateObj = new Date(selectedDateKey + 'T00:00:00');
@@ -827,8 +923,22 @@
             const formattedDateTitle = `${dateObj.getMonth() + 1}월 ${dateObj.getDate()}일 ${daysOfWeek[dateObj.getDay()]}`;
             lines.push(formattedDateTitle);
 
-            if (current.summary && current.summary.trim()) {
-                lines.push(current.summary.trim());
+            let summaryText = (current.summary || "").trim();
+            if (summaryText) {
+                if (isVerse) {
+                    if (summaryText.endsWith('/벌스*') || summaryText.endsWith('/벌스')) {
+                        lines.push(summaryText);
+                    } else if (summaryText.startsWith('(') && summaryText.endsWith(')')) {
+                        const inner = summaryText.slice(1, -1);
+                        lines.push(`(${inner}/벌스*)`);
+                    } else {
+                        lines.push(`(${summaryText}/벌스*)`);
+                    }
+                } else {
+                    lines.push(summaryText);
+                }
+            } else if (isVerse) {
+                lines.push(`(벌스*)`);
             }
 
             lines.push("");
@@ -838,23 +948,21 @@
                 if (ev.time && ev.time.trim()) {
                     line += ` ${ev.time.trim()}`;
                 }
-                if (ev.detail && ev.detail.trim()) {
-                    const det = ev.detail.trim();
-                    if (det.startsWith('(') || det.startsWith(' ')) {
-                        line += det;
-                    } else {
-                        line += ` ${det}`;
-                    }
+                const formattedMemo = formatDetailText(ev.detail, ev.time, isVerse);
+                if (formattedMemo) {
+                    line += ` ${formattedMemo}`;
                 }
                 lines.push(line);
             });
 
             const dur = calculateWorkDurations();
             lines.push("");
-            lines.push("");
 
-            let line1 = dur.workStr;
-            if (dur.extraStr) line1 += dur.extraStr;
+            if (isVerse) {
+                lines.push("오늘 벌스로 AM9:30부터 체크하여");
+            }
+
+            let line1 = dur.workStr + dur.extraStr;
             lines.push(line1);
 
             lines.push("");
@@ -871,7 +979,9 @@
             const listEl = document.getElementById('eventsList');
             if (!listEl) return;
 
-            const events = (workData[selectedDateKey] && workData[selectedDateKey].events) || [];
+            const currentData = workData[selectedDateKey] || {};
+            const events = currentData.events || [];
+            const isVerse = !!currentData.isVerse;
             listEl.innerHTML = '';
 
             if (events.length === 0) {
@@ -885,38 +995,69 @@
 
             events.forEach((ev, idx) => {
                 const itemEl = document.createElement('div');
-                itemEl.className = "flex items-center gap-1.5 p-2 bg-slate-50/80 rounded-xl border border-slate-200/80 transition";
+                const hasDetail = ev.detail && ev.detail.trim() !== '';
+                const hasTitle = ev.title && ev.title.trim() !== '';
+                
+                const isDawn = isDawnVerseEvent(ev.time, isVerse);
+                const formattedMemo = formatDetailText(ev.detail, ev.time, isVerse);
+
+                const cardBg = (hasDetail || hasTitle) 
+                    ? (isDawn ? "bg-rose-50/40 border-rose-200/90 shadow-2xs" : "bg-indigo-50/30 border-indigo-200/80 shadow-2xs") 
+                    : "bg-slate-50/80 border-slate-200/80";
+
+                itemEl.className = `flex items-center gap-1.5 p-2 rounded-xl border transition ${cardBg}`;
+
+                const titleInputClass = isDawn
+                    ? "w-full text-xs font-bold px-2 py-1.5 rounded-lg border border-rose-300 bg-rose-50/90 text-rose-700 focus:outline-none focus:ring-1 focus:ring-rose-500 transition placeholder:text-rose-300"
+                    : "w-full text-xs font-bold px-2 py-1.5 rounded-lg border border-indigo-200/80 bg-indigo-50/80 text-indigo-950 focus:outline-none focus:border-indigo-500 transition placeholder:text-indigo-300";
+
+                const timeBtnClass = isDawn
+                    ? "w-full text-xs font-mono font-bold px-2 py-1.5 rounded-lg border border-rose-200 bg-white hover:bg-rose-50/50 text-rose-700 text-left truncate flex items-center justify-between"
+                    : "w-full text-xs font-mono font-bold px-2 py-1.5 rounded-lg border border-indigo-200/80 bg-white hover:bg-indigo-50/50 text-indigo-950 text-left truncate flex items-center justify-between";
+
+                const memoInputClass = isDawn 
+                    ? "w-full text-xs font-bold px-2 py-1.5 rounded-lg border border-rose-300 bg-rose-50/90 text-rose-700 focus:outline-none focus:ring-1 focus:ring-rose-500 transition placeholder:text-rose-300"
+                    : "w-full text-xs font-medium px-2 py-1.5 rounded-lg border border-indigo-200/80 bg-indigo-50/80 text-indigo-950 focus:outline-none focus:border-indigo-500 transition placeholder:text-indigo-300";
 
                 itemEl.innerHTML = `
                     <div class="w-1/4 min-w-[70px]">
                         <input type="text" value="${escapeHtml(ev.title || '')}" 
-                            onchange="updateEventField(${idx}, 'title', this.value)"
+                            oninput="updateEventField(${idx}, 'title', this.value)"
                             placeholder="항목명" 
-                            class="w-full text-xs font-bold px-2 py-1.5 rounded-lg border border-slate-200 bg-white focus:outline-none focus:border-indigo-500">
+                            class="${titleInputClass}">
                     </div>
 
                     <div class="w-1/3 min-w-[90px]">
                         <button type="button" onclick="openTimePickerModal(${idx})" 
-                            class="w-full text-xs font-mono font-bold px-2 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-800 text-left truncate flex items-center justify-between">
+                            class="${timeBtnClass}">
                             <span>${escapeHtml(ev.time || 'AM12:00')}</span>
-                            <i class="fa-solid fa-clock text-[10px] text-slate-400"></i>
                         </button>
                     </div>
 
                     <div class="flex-grow">
-                        <input type="text" value="${escapeHtml(ev.detail || '')}" 
-                            onchange="updateEventField(${idx}, 'detail', this.value)"
+                        <input type="text" value="${escapeHtml(formattedMemo)}" 
+                            oninput="handleDetailInput(${idx}, this.value)"
+                            onblur="renderEventsList()"
                             placeholder="메모/대상" 
-                            class="w-full text-xs px-2 py-1.5 rounded-lg border border-slate-200 bg-white focus:outline-none focus:border-indigo-500">
+                            class="${memoInputClass}">
                     </div>
 
-                    <button onclick="deleteEvent(${idx})" class="p-1.5 text-slate-300 hover:text-rose-500 rounded-lg transition">
-                        <i class="fa-solid fa-xmark text-xs"></i>
+                    <button onclick="deleteEvent(${idx})" class="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg font-bold text-xs transition">
+                        ✕
                     </button>
                 `;
 
                 listEl.appendChild(itemEl);
             });
+        }
+
+        function handleDetailInput(idx, rawValue) {
+            if (workData[selectedDateKey] && workData[selectedDateKey].events && workData[selectedDateKey].events[idx]) {
+                const cleaned = cleanDetailText(rawValue);
+                workData[selectedDateKey].events[idx].detail = cleaned;
+                isUserEditingOutput = false;
+                saveData();
+            }
         }
 
         function addPresetEvent(title, defaultTime) {
@@ -1005,7 +1146,6 @@
             const minutesGrid = document.getElementById('etpMinutesGrid');
             if (minutesGrid) {
                 minutesGrid.innerHTML = '';
-                // 5-minute intervals from 0 to 55
                 const minOptions = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
                 minOptions.forEach(m => {
                     const btn = document.createElement('button');
@@ -1234,6 +1374,13 @@
             document.getElementById('summaryNoteInput')?.addEventListener('input', (e) => {
                 if (!workData[selectedDateKey]) workData[selectedDateKey] = {};
                 workData[selectedDateKey].summary = e.target.value;
+                isUserEditingOutput = false;
+                saveData();
+            });
+
+            document.getElementById('extraTimeInput')?.addEventListener('input', (e) => {
+                if (!workData[selectedDateKey]) workData[selectedDateKey] = {};
+                workData[selectedDateKey].extraTime = e.target.value;
                 isUserEditingOutput = false;
                 saveData();
             });
